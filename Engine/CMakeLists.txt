@@ -11,6 +11,9 @@ find_package(glfw3 REQUIRED)
 # Finding glad
 find_package(glad REQUIRED)
 
+# Finding glm
+find_package(glm REQUIRED)
+
 # Target
 set(TARGET_NAME Snailgine)
 file(GLOB_RECURSE SRCS "src/*.cpp" "src/*.hpp")
@@ -30,6 +33,9 @@ target_link_libraries(${TARGET_NAME} PRIVATE glfw)
 
 # Linking glad
 target_link_libraries(${TARGET_NAME} PRIVATE glad::glad)
+
+# Linking glm
+target_link_libraries(${TARGET_NAME} PUBLIC glm)
 
 # Custom definitions
 target_compile_definitions(${TARGET_NAME} PRIVATE "GLFW_INCLUDE_NONE")

@@ -1,10 +1,10 @@
-#include "IndexBufferOpenGL.hpp"
+#include "OpenGLIndexBuffer.hpp"
 
 #include <glad/glad.h>
 
 namespace sn
 {
-	IndexBufferOpenGL::IndexBufferOpenGL(uint32_t* p_Indices, uint32_t p_Count)
+	OpenGLIndexBuffer::OpenGLIndexBuffer(uint32_t* p_Indices, uint32_t p_Count)
 	{
 		glCreateBuffers(1, &m_RendererID);
 
@@ -14,17 +14,17 @@ namespace sn
 		glBufferData(GL_ARRAY_BUFFER, p_Count * sizeof(uint32_t), p_Indices, GL_STATIC_DRAW);
 	}
 
-	IndexBufferOpenGL::~IndexBufferOpenGL()
+	OpenGLIndexBuffer::~OpenGLIndexBuffer()
 	{
 		glDeleteBuffers(1, &m_RendererID);
 	}
 
-	void IndexBufferOpenGL::Bind() const
+	void OpenGLIndexBuffer::Bind() const
 	{
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_RendererID);
 	}
 
-	void IndexBufferOpenGL::Unbind() const
+	void OpenGLIndexBuffer::Unbind() const
 	{
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
 	}

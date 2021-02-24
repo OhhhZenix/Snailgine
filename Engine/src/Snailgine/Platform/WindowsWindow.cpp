@@ -1,19 +1,19 @@
-#include "WindowWindows.hpp"
+#include "WindowsWindow.hpp"
 
 #include <iostream>
 
 namespace sn
 {
-	WindowWindows::WindowWindows()
+	WindowsWindow::WindowsWindow()
 	= default;
 
-	WindowWindows::~WindowWindows()
+	WindowsWindow::~WindowsWindow()
 	{
 		glfwDestroyWindow((GLFWwindow*)m_Handle);
 		glfwTerminate();
 	}
 
-	void WindowWindows::Init()
+	void WindowsWindow::Init()
 	{
 		// Tries to initialize GLFW, but if fail it will exit the app
 		if (!glfwInit())
@@ -33,13 +33,13 @@ namespace sn
 		}
 	}
 
-	void WindowWindows::ProcessUpdate()
+	void WindowsWindow::ProcessUpdate()
 	{
 		// Polling the new events
 		glfwPollEvents();
 	}
 
-	void* WindowWindows::GetHandle()
+	void* WindowsWindow::GetHandle()
 	{
 		return m_Handle;
 	}

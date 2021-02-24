@@ -1,7 +1,7 @@
 #pragma once
 
 #include <Snailgine/PCH.hpp>
-#include "Snailgine/Graphic/Shader.hpp"
+#include "Snailgine/Graphic/ShaderDataType.hpp"
 
 namespace sn
 {

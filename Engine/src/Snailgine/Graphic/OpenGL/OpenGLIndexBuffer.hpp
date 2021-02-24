@@ -4,12 +4,12 @@
 
 namespace sn
 {
-	class IndexBufferOpenGL : public IndexBuffer
+	class OpenGLIndexBuffer : public IndexBuffer
 	{
 	 public:
-		IndexBufferOpenGL(uint32_t* p_Indices, uint32_t p_Count);
+		OpenGLIndexBuffer(uint32_t* p_Indices, uint32_t p_Count);
 
-		~IndexBufferOpenGL() override;
+		~OpenGLIndexBuffer() override;
 
 		void Bind() const override;
 

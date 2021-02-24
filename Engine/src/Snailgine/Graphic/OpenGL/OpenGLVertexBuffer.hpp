@@ -4,15 +4,15 @@
 
 namespace sn
 {
-	class VertexBufferOpenGL : public VertexBuffer
+	class OpenGLVertexBuffer : public VertexBuffer
 	{
 	 private:
 		uint32_t m_RendererID;
 
 	 public:
-		VertexBufferOpenGL(float* p_Vertices, uint32_t p_Size);
+		OpenGLVertexBuffer(float* p_Vertices, uint32_t p_Size);
 
-		~VertexBufferOpenGL() override;
+		~OpenGLVertexBuffer() override;
 
 		void Bind() override;
 

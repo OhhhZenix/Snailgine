@@ -5,15 +5,15 @@
 
 namespace sn
 {
-	class WindowWindows : public Window
+	class WindowsWindow : public Window
 	{
 	 private:
 		GLFWwindow* m_Handle;
 
 	 public:
-		WindowWindows();
+		WindowsWindow();
 
-		~WindowWindows();
+		~WindowsWindow();
 
 		void Init() override;
 
