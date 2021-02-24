@@ -1,5 +1,5 @@
 {
-  "name": "snailgine-engine",
+  "name": "snailgine",
   "version": "1.0.0",
   "dependencies": [
     "glfw3"

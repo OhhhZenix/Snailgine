@@ -1,5 +1,4 @@
 # Setups Engine
-include(VcpkgToolchain)
 project(Snailgine-Engine)
 message("Setting up the Engine")
 

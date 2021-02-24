@@ -1,5 +1,8 @@
 cmake_minimum_required(VERSION 3.17)
 
+# Sets up vcpkg
+include(VcpkgToolchain)
+
 # Add our cmake module path to the existing cmake module path
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_SOURCE_DIR}/cmake)
 
