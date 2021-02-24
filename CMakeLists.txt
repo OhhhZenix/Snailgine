@@ -1,10 +1,7 @@
 cmake_minimum_required(VERSION 3.17)
 
 # Sets up vcpkg
-include(VcpkgToolchain)
-
-# Add our cmake module path to the existing cmake module path
-set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_SOURCE_DIR}/cmake)
+include(cmake/VcpkgToolchain.cmake)
 
 # Project
 project(Snailgine)
@@ -17,4 +14,4 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 add_subdirectory(Engine)
 
 # Editor
-# add_subdirectory(Editor)
+add_subdirectory(Editor)
