@@ -1,9 +1,16 @@
 #include "Application.hpp"
 
-#include "Snailgine/Graphic/Renderer.hpp"
+#include "Snailgine/Core/Base.hpp"
 
 namespace sn
 {
+	void Init()
+	{
+		Log::Init();
+		Application::Instance().Init();
+		SN_LOG_INFO("Initialized all systems...");
+	}
+
 	Application::Application()
 	{
 
@@ -17,14 +24,14 @@ namespace sn
 
 	void Application::Init()
 	{
-		m_Window->Init();
+		// m_Window->Init();
 	}
 
 	void Application::Run()
 	{
 		while (m_Running) {
-			RenderCommand::SetClearColor(1.0f, 1.0f, 1.0f, 1.0f);
-			RenderCommand::Clear();
+			// RenderCommand::SetClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+			// RenderCommand::Clear();
 		}
 	}
 }

@@ -3,6 +3,8 @@
 #include "Snailgine/Core/Window.hpp"
 
 namespace sn {
+	 void Init();
+
 	class Application
 	{
 	 private:
