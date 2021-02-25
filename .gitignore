@@ -2,3 +2,4 @@
 /cmake-build-debug
 /.vscode
 /build
+/vcpkg_installed
