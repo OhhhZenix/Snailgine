@@ -61,6 +61,12 @@ else ()
     target_compile_definitions(${TARGET_NAME} PRIVATE "SN_BUILD_RELEASE=0")
 endif ()
 
+if (WIN32)
+    target_compile_definitions(${TARGET_NAME} PRIVATE "SN_PLATFORM_WINDOW=1")
+else()
+    target_compile_definitions(${TARGET_NAME} PRIVATE "SN_PLATFORM_WINDOW=0")
+endif ()
+
 if (SN_ENABLE_PROFILE EQUAL ON)
     target_compile_definitions(${TARGET_NAME} PRIVATE "SN_PROFILE=1")
 else ()

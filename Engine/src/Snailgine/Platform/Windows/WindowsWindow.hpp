@@ -2,6 +2,7 @@
 
 #include <GLFW/glfw3.h>
 #include "Snailgine/Core/Window.hpp"
+#include "Snailgine/Graphic/Context.hpp"
 
 namespace sn
 {
@@ -9,6 +10,7 @@ namespace sn
 	{
 	 private:
 		GLFWwindow* m_Handle;
+		Context* m_Context;
 
 	 public:
 		WindowsWindow();

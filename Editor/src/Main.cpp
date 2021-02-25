@@ -3,4 +3,5 @@
 int main()
 {
 	sn::Init();
+	sn::Application::Instance().Run();
 }

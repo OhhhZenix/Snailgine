@@ -14,6 +14,8 @@ namespace sn {
 	 private:
 		Application();
 
+		~Application();
+
 	 public:
 		static Application& Instance();
 

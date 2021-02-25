@@ -12,7 +12,7 @@ namespace sn
 	class Log
 	{
 	 private:
-		RcPtr<spdlog::logger> m_Logger;
+		std::shared_ptr<spdlog::logger> m_Logger;
 
 	 private:
 		// some data
@@ -23,7 +23,7 @@ namespace sn
 
 		static Log& Instance();
 
-		RcPtr<spdlog::logger>& GetLogger();
+		std::shared_ptr<spdlog::logger>& GetLogger();
 
 	 public:
 		// Copy construct
