@@ -1,5 +1,6 @@
 #pragma once
 
+#include <xmmintrin.h>
 #include <memory>
 #include <map>
 #include <typeindex>

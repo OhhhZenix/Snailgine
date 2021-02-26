@@ -3,6 +3,7 @@
 #include "Snailgine/Event/EventBus.hpp"
 #include "Snailgine/Graphic/Renderer.hpp"
 #include "Snailgine/ImGui/ImGuiLayer.hpp"
+#include "Snailgine/Math/Vec4.hpp"
 
 namespace sn
 {
@@ -41,6 +42,9 @@ namespace sn
 		EventBus::Instance().Subscribe(this, &Application::OnWindowResizeEvent);
 
 		PushOverlay(new ImGuiLayer());
+
+		Vec4i some_Vec = {1 ,2 , 3, 4};
+		SN_LOG_INFO("{} {} {} {}", some_Vec[0], some_Vec[1], some_Vec[2], some_Vec[3]);
 	}
 
 	void Application::Run()
@@ -56,6 +60,8 @@ namespace sn
 
 				if (!m_Minimized) {
 					for (Layer* f_Layer : m_LayerStack.GetLayers()) {
+						if (!f_Layer->IsEnabled())
+							continue;
 						f_Layer->ProcessUpdate(f_DeltaTime);
 					}
 				}
@@ -98,12 +104,10 @@ namespace sn
 		if (p_Event.GetWidth() == 0 || p_Event.GetHeight() == 0)
 		{
 			m_Minimized = true;
-			p_Event.SetCancelled(true);
 			return;
 		}
 
 		m_Minimized = false;
 		RenderCommand::SetViewport(0, 0, p_Event.GetWidth(), p_Event.GetHeight());
-		p_Event.SetCancelled(true);
 	}
 }

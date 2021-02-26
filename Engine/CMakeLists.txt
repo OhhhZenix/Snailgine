@@ -17,9 +17,6 @@ find_package(glfw3 REQUIRED)
 # Finding glad
 find_package(glad REQUIRED)
 
-# Finding glm
-find_package(glm REQUIRED)
-
 # Finding imgui
 find_package(imgui REQUIRED)
 
@@ -30,20 +27,46 @@ add_library(
         src/Snailgine/Core/Application.cpp
         src/Snailgine/Core/Application.hpp
         src/Snailgine/Core/Base.hpp
+        src/Snailgine/Core/KeyCode.hpp
         src/Snailgine/Core/Log.cpp
         src/Snailgine/Core/Log.hpp
+        src/Snailgine/Core/MouseCode.hpp
         src/Snailgine/Core/Window.cpp
         src/Snailgine/Core/Window.hpp
         src/Snailgine/Debug/Instrumentor.cpp
         src/Snailgine/Debug/Instrumentor.hpp
+        src/Snailgine/Event/App/AppRenderEvent.cpp
+        src/Snailgine/Event/App/AppRenderEvent.hpp
+        src/Snailgine/Event/App/AppTickEvent.cpp
+        src/Snailgine/Event/App/AppTickEvent.hpp
+        src/Snailgine/Event/App/AppUpdateEvent.cpp
+        src/Snailgine/Event/App/AppUpdateEvent.hpp
+        src/Snailgine/Event/Keyboard/KeyEvent.cpp
+        src/Snailgine/Event/Keyboard/KeyEvent.hpp
+        src/Snailgine/Event/Keyboard/KeyPressedEvent.cpp
+        src/Snailgine/Event/Keyboard/KeyPressedEvent.hpp
+        src/Snailgine/Event/Keyboard/KeyReleasedEvent.cpp
+        src/Snailgine/Event/Keyboard/KeyReleasedEvent.hpp
+        src/Snailgine/Event/Keyboard/KeyTypedEvent.cpp
+        src/Snailgine/Event/Mouse/MouseButtonEvent.cpp
+        src/Snailgine/Event/Mouse/MouseButtonEvent.hpp
+        src/Snailgine/Event/Mouse/MouseButtonPressedEvent.cpp
+        src/Snailgine/Event/Mouse/MouseButtonPressedEvent.hpp
+        src/Snailgine/Event/Mouse/MouseButtonReleasedEvent.cpp
+        src/Snailgine/Event/Mouse/MouseButtonReleasedEvent.hpp
+        src/Snailgine/Event/Mouse/MouseMovedEvent.cpp
+        src/Snailgine/Event/Mouse/MouseMovedEvent.hpp
+        src/Snailgine/Event/Mouse/MouseScrolledEvent.cpp
+        src/Snailgine/Event/Mouse/MouseScrolledEvent.hpp
+        src/Snailgine/Event/Keyboard/KeyTypedEvent.hpp
         src/Snailgine/Event/Window/WindowCloseEvent.cpp
         src/Snailgine/Event/Window/WindowCloseEvent.hpp
         src/Snailgine/Event/Window/WindowResizeEvent.cpp
         src/Snailgine/Event/Window/WindowResizeEvent.hpp
-        src/Snailgine/Event/EventBaseFunction.cpp
-        src/Snailgine/Event/EventBaseFunction.hpp
         src/Snailgine/Event/Event.cpp
         src/Snailgine/Event/Event.hpp
+        src/Snailgine/Event/EventBaseFunction.cpp
+        src/Snailgine/Event/EventBaseFunction.hpp
         src/Snailgine/Event/EventBus.cpp
         src/Snailgine/Event/EventBus.hpp
         src/Snailgine/Event/EventMemberFunction.hpp
@@ -65,6 +88,7 @@ add_library(
         src/Snailgine/Layer/Layer.hpp
         src/Snailgine/Layer/LayerStack.cpp
         src/Snailgine/Layer/LayerStack.hpp
+        src/Snailgine/Math/Vec4.hpp
 )
 
 if (WIN32)
@@ -92,9 +116,6 @@ target_link_libraries(${TARGET_NAME} PRIVATE glfw)
 
 # Linking glad
 target_link_libraries(${TARGET_NAME} PRIVATE glad::glad)
-
-# Linking glm
-target_link_libraries(${TARGET_NAME} PUBLIC glm)
 
 # Linking imgui
 target_link_libraries(${TARGET_NAME} PRIVATE imgui::imgui)

@@ -14,6 +14,8 @@ namespace sn
 		f_IO.BackendFlags |= ImGuiBackendFlags_HasMouseCursors;
 		f_IO.BackendFlags |= ImGuiBackendFlags_HasSetMousePos;
 
+		ImVec4 a;
+
 		// Setup Platform/Renderer bindings
 		ImGui_ImplGlfw_InitForOpenGL(static_cast<GLFWwindow*>(Application::Instance().GetWindow().GetHandle()), true);
 		ImGui_ImplOpenGL3_Init("#version 410");
