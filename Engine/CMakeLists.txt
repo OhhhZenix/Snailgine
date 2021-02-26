@@ -22,8 +22,47 @@ find_package(glm REQUIRED)
 
 # Target
 set(TARGET_NAME Snailgine)
-file(GLOB_RECURSE SRCS "src/*.cpp" "src/*.hpp")
-add_library(${TARGET_NAME} ${SRCS})
+add_library(
+        ${TARGET_NAME}
+        src/Snailgine/Core/Application.cpp
+        src/Snailgine/Core/Application.hpp
+        src/Snailgine/Core/Base.hpp
+        src/Snailgine/Core/Log.cpp
+        src/Snailgine/Core/Log.hpp
+        src/Snailgine/Core/Window.cpp
+        src/Snailgine/Core/Window.hpp
+        src/Snailgine/Debug/Instrumentor.cpp
+        src/Snailgine/Debug/Instrumentor.hpp
+        src/Snailgine/Event/Window/WindowCloseEvent.cpp
+        src/Snailgine/Event/Window/WindowCloseEvent.hpp
+        src/Snailgine/Event/EventBaseFunction.cpp
+        src/Snailgine/Event/EventBaseFunction.hpp
+        src/Snailgine/Event/Event.hpp
+        src/Snailgine/Event/EventBus.cpp
+        src/Snailgine/Event/EventBus.hpp
+        src/Snailgine/Event/EventMemberFunction.cpp
+        src/Snailgine/Event/EventMemberFunction.hpp
+        src/Snailgine/Graphic/Context.cpp
+        src/Snailgine/Graphic/Context.hpp
+        src/Snailgine/Graphic/Graphic.cpp
+        src/Snailgine/Graphic/Graphic.hpp
+        src/Snailgine/Graphic/RenderCommand.cpp
+        src/Snailgine/Graphic/RenderCommand.hpp
+        src/Snailgine/Graphic/Renderer.cpp
+        src/Snailgine/Graphic/Renderer.hpp
+        src/Snailgine/Graphic/OpenGL/OpenGL.cpp
+        src/Snailgine/Graphic/OpenGL/OpenGL.hpp
+        src/Snailgine/Graphic/OpenGL/OpenGLContext.cpp
+        src/Snailgine/Graphic/OpenGL/OpenGLContext.hpp
+)
+
+if (WIN32)
+    target_sources(
+            ${TARGET_NAME}
+            PRIVATE src/Snailgine/Platform/Windows/WindowsWindow.cpp
+            PRIVATE src/Snailgine/Platform/Windows/WindowsWindow.hpp
+    )
+endif()
 
 # Includes the project include path
 target_include_directories(${TARGET_NAME} PUBLIC src)
@@ -63,7 +102,7 @@ endif ()
 
 if (WIN32)
     target_compile_definitions(${TARGET_NAME} PRIVATE "SN_PLATFORM_WINDOW=1")
-else()
+else ()
     target_compile_definitions(${TARGET_NAME} PRIVATE "SN_PLATFORM_WINDOW=0")
 endif ()
 

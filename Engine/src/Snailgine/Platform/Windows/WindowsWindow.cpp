@@ -1,6 +1,14 @@
 #include "WindowsWindow.hpp"
 
 #include "Snailgine/Core/Log.hpp"
+#include "Snailgine/Event/EventBus.hpp"
+#include "Snailgine/Event/Window/WindowCloseEvent.hpp"
+
+void WindowCloseCallback([[maybe_unused]] GLFWwindow* p_Window)
+{
+	using namespace sn;
+	EventBus::Instance().Publish(new WindowCloseEvent());
+}
 
 namespace sn
 {
@@ -44,6 +52,9 @@ namespace sn
 		// Makes a graphic context for the window
 		m_Context = Context::Create(m_Handle);
 		m_Context->Init();
+
+		// Callbacks
+		glfwSetWindowCloseCallback(static_cast<GLFWwindow*>(m_Handle), WindowCloseCallback);
 	}
 
 	void WindowsWindow::ProcessUpdate()

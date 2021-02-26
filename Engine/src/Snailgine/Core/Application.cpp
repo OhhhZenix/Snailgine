@@ -1,6 +1,6 @@
 #include "Application.hpp"
 
-#include "Snailgine/Core/Base.hpp"
+#include "Snailgine/Event/EventBus.hpp"
 #include "Snailgine/Graphic/Renderer.hpp"
 
 namespace sn
@@ -34,6 +34,8 @@ namespace sn
 	{
 		m_Window->Init();
 		Renderer::Init();
+
+		EventBus::Instance().Subscribe(this, &Application::OnWindowCloseEvent);
 	}
 
 	void Application::Run()
@@ -50,5 +52,10 @@ namespace sn
 			auto f_Stop = std::chrono::high_resolution_clock::now();
 			f_DeltaTime = std::chrono::duration_cast<std::chrono::duration<float, std::milli>>(f_Stop - f_Start).count();
 		}
+	}
+
+	void Application::OnWindowCloseEvent(WindowCloseEvent* p_Event)
+	{
+		m_Running = false;
 	}
 }

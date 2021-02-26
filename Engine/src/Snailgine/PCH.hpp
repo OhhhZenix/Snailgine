@@ -1,6 +1,9 @@
 #pragma once
 
 #include <memory>
+#include <map>
+#include <typeindex>
+#include <list>
 #include <algorithm>
 #include <chrono>
 #include <fstream>
