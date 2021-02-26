@@ -40,7 +40,6 @@ add_library(
         src/Snailgine/Event/Event.hpp
         src/Snailgine/Event/EventBus.cpp
         src/Snailgine/Event/EventBus.hpp
-        src/Snailgine/Event/EventMemberFunction.cpp
         src/Snailgine/Event/EventMemberFunction.hpp
         src/Snailgine/Graphic/Context.cpp
         src/Snailgine/Graphic/Context.hpp

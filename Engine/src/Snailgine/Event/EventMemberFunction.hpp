@@ -14,8 +14,16 @@ namespace sn
 		EventFunctionPtr m_Function;
 
 	 public:
-		EventMemberFunction(T* p_Instance, EventFunctionPtr p_Function);
+		EventMemberFunction(T* p_Instance, EventMemberFunction::EventFunctionPtr p_Function)
+		{
+			m_Instance = p_Instance;
+			m_Function = p_Function;
+		}
 
-		void Call(Event* p_Event) override;
+
+		void Call(Event* p_Event) override
+		{
+			(m_Instance->*m_Function)(static_cast<EventType*>(p_Event));
+		}
 	};
 }

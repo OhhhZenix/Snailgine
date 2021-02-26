@@ -9,6 +9,8 @@ namespace sn {
 		virtual void Call(Event* p_Event) = 0;
 
 	 public:
+		virtual ~EventBaseFunction() = default;
+
 		void Execute(Event* p_Event);
 	};
 }
