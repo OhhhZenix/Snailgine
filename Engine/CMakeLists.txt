@@ -35,8 +35,11 @@ add_library(
         src/Snailgine/Debug/Instrumentor.hpp
         src/Snailgine/Event/Window/WindowCloseEvent.cpp
         src/Snailgine/Event/Window/WindowCloseEvent.hpp
+        src/Snailgine/Event/Window/WindowResizeEvent.cpp
+        src/Snailgine/Event/Window/WindowResizeEvent.hpp
         src/Snailgine/Event/EventBaseFunction.cpp
         src/Snailgine/Event/EventBaseFunction.hpp
+        src/Snailgine/Event/Event.cpp
         src/Snailgine/Event/Event.hpp
         src/Snailgine/Event/EventBus.cpp
         src/Snailgine/Event/EventBus.hpp

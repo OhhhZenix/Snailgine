@@ -2,6 +2,7 @@
 
 #include "Snailgine/Core/Window.hpp"
 #include "Snailgine/Event/Window/WindowCloseEvent.hpp"
+#include "Snailgine/Event/Window/WindowResizeEvent.hpp"
 
 namespace sn {
 	 void Init();
@@ -25,7 +26,9 @@ namespace sn {
 		void Run();
 
 	 private:
-		void OnWindowCloseEvent(WindowCloseEvent* p_Event);
+		void OnWindowCloseEvent(WindowCloseEvent& p_Event);
+
+		void OnWindowResizeEvent(WindowResizeEvent& p_Event);
 
 	 public:
 		// Copy construct

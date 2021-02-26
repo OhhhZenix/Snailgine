@@ -2,10 +2,15 @@
 
 #include "Snailgine/Event/Event.hpp"
 
-namespace sn {
+namespace sn
+{
 	class WindowCloseEvent : public Event
 	{
 	 public:
-		~WindowCloseEvent();
+		~WindowCloseEvent() override;
+
+		[[nodiscard]] EventType GetEventType() const override;
+
+		[[nodiscard]] EventCategory GetEventCategory() const override;
 	};
 }

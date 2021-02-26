@@ -22,4 +22,9 @@ namespace sn
 	{
 		return std::make_unique<T>(std::forward<Args>(args)...);
 	}
+
+	constexpr uint16_t Bit(uint16_t x)
+	{
+		return static_cast<uint16_t>(1u << x);
+	}
 }

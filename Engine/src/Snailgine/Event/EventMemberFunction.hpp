@@ -8,7 +8,7 @@ namespace sn
 	class EventMemberFunction : public EventBaseFunction
 	{
 	 private:
-		using EventFunctionPtr = void (T::*)(EventType*);
+		using EventFunctionPtr = void (T::*)(EventType&);
 
 		T* m_Instance;
 		EventFunctionPtr m_Function;
@@ -21,9 +21,9 @@ namespace sn
 		}
 
 
-		void Call(Event* p_Event) override
+		void Call(Event& p_Event) override
 		{
-			(m_Instance->*m_Function)(static_cast<EventType*>(p_Event));
+			(m_Instance->*m_Function)(static_cast<EventType&>(p_Event));
 		}
 	};
 }

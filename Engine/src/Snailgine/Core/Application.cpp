@@ -36,13 +36,14 @@ namespace sn
 		Renderer::Init();
 
 		EventBus::Instance().Subscribe(this, &Application::OnWindowCloseEvent);
+		EventBus::Instance().Subscribe(this, &Application::OnWindowResizeEvent);
 	}
 
 	void Application::Run()
 	{
 		float f_DeltaTime = 0;
 		while (m_Running) {
-			printf("DeltaTime: %f\n", f_DeltaTime);
+			SN_LOG_INFO("DeltaTime: {}", f_DeltaTime);
 			auto f_Start = std::chrono::high_resolution_clock::now();
 			{
 				RenderCommand::SetClearColor(0.0f, 0.0f, 1.0f, 1.0f);
@@ -54,8 +55,15 @@ namespace sn
 		}
 	}
 
-	void Application::OnWindowCloseEvent(WindowCloseEvent* p_Event)
+	void Application::OnWindowCloseEvent(WindowCloseEvent& p_Event)
 	{
+		SN_LOG_INFO("Application::OnWindowCloseEvent received {}", p_Event.GetEventType());
 		m_Running = false;
+	}
+
+	void Application::OnWindowResizeEvent(WindowResizeEvent& p_Event)
+	{
+		SN_LOG_INFO("Application::OnWindowResizeEvent received {}", p_Event.GetEventType());
+		RenderCommand::SetViewport(0, 0, p_Event.GetWidth(), p_Event.GetHeight());
 	}
 }

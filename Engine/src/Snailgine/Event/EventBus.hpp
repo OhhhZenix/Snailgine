@@ -21,13 +21,13 @@ namespace sn
 		static EventBus& Instance();
 
 		template<typename T, typename EventType>
-		void Subscribe(T* p_Instance, void (T::*p_Function)(EventType*))
+		void Subscribe(T* p_Instance, void (T::*p_Function)(EventType&))
 		{
 			m_Subscribers[typeid(EventType)].push_back(new EventMemberFunction<T, EventType>(p_Instance, p_Function));
 		}
 
 		template<typename EventType>
-		void Publish(EventType * p_Event)
+		void Publish(EventType& p_Event)
 		{
 			EventHandleList& f_Handlers = m_Subscribers[typeid(EventType)];
 
@@ -35,8 +35,11 @@ namespace sn
 				return;
 
 			for (auto& f_Handler : f_Handlers)
-				if (f_Handler != nullptr)
-					f_Handler->Execute(p_Event);
+			{
+				if (f_Handler == nullptr)
+					continue;
+				f_Handler->Execute(p_Event);
+			}
 		}
 
 	 public:
