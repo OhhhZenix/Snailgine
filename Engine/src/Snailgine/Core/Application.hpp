@@ -3,6 +3,7 @@
 #include "Snailgine/Core/Window.hpp"
 #include "Snailgine/Event/Window/WindowCloseEvent.hpp"
 #include "Snailgine/Event/Window/WindowResizeEvent.hpp"
+#include "Snailgine/Layer/LayerStack.hpp"
 
 namespace sn {
 	 void Init();
@@ -11,7 +12,9 @@ namespace sn {
 	{
 	 private:
 		Window* m_Window;
+		LayerStack m_LayerStack;
 		bool m_Running;
+		bool m_Minimized;
 
 	 private:
 		Application();
@@ -24,6 +27,12 @@ namespace sn {
 		void Init();
 
 		void Run();
+
+		void PushLayer(Layer* p_Layer);
+
+		void PushOverlay(Layer* p_Overlay);
+
+		Window& GetWindow();
 
 	 private:
 		void OnWindowCloseEvent(WindowCloseEvent& p_Event);

@@ -20,6 +20,9 @@ find_package(glad REQUIRED)
 # Finding glm
 find_package(glm REQUIRED)
 
+# Finding imgui
+find_package(imgui REQUIRED)
+
 # Target
 set(TARGET_NAME Snailgine)
 add_library(
@@ -56,6 +59,12 @@ add_library(
         src/Snailgine/Graphic/OpenGL/OpenGL.hpp
         src/Snailgine/Graphic/OpenGL/OpenGLContext.cpp
         src/Snailgine/Graphic/OpenGL/OpenGLContext.hpp
+        src/Snailgine/ImGui/ImGuiLayer.cpp
+        src/Snailgine/ImGui/ImGuiLayer.hpp
+        src/Snailgine/Layer/Layer.cpp
+        src/Snailgine/Layer/Layer.hpp
+        src/Snailgine/Layer/LayerStack.cpp
+        src/Snailgine/Layer/LayerStack.hpp
 )
 
 if (WIN32)
@@ -86,6 +95,9 @@ target_link_libraries(${TARGET_NAME} PRIVATE glad::glad)
 
 # Linking glm
 target_link_libraries(${TARGET_NAME} PUBLIC glm)
+
+# Linking imgui
+target_link_libraries(${TARGET_NAME} PRIVATE imgui::imgui)
 
 # Custom definitions
 target_compile_definitions(${TARGET_NAME} PRIVATE "GLFW_INCLUDE_NONE")

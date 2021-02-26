@@ -40,7 +40,12 @@ namespace sn
 
 	class Event
 	{
+	 private:
+		bool m_Cancelled;
+
 	 public:
+		Event();
+
 		virtual ~Event() = default;
 
 		[[nodiscard]] virtual EventType GetEventType() const = 0;
@@ -48,5 +53,9 @@ namespace sn
 		[[nodiscard]] virtual EventCategory GetEventCategory() const = 0;
 
 		[[nodiscard]] bool IsInCategory(EventCategory p_Category) const;
+
+		[[nodiscard]] bool IsCancelled() const;
+
+		void SetCancelled(bool p_Cancelled);
 	};
 }

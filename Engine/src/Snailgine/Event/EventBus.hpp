@@ -38,6 +38,8 @@ namespace sn
 			{
 				if (f_Handler == nullptr)
 					continue;
+				if (p_Event.IsCancelled())
+					break;
 				f_Handler->Execute(p_Event);
 			}
 		}

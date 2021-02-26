@@ -45,8 +45,23 @@ namespace sn {
 		return static_cast<EventCategory>(~static_cast<std::underlying_type_t<EventCategory>>(p_Category));
 	}
 
+	Event::Event()
+	{
+		m_Cancelled = false;
+	}
+
 	bool Event::IsInCategory(EventCategory p_Category) const
 	{
 		return static_cast<bool>(GetEventCategory() & p_Category);
+	}
+
+	bool Event::IsCancelled() const
+	{
+		return m_Cancelled;
+	}
+
+	void Event::SetCancelled(bool p_Cancelled)
+	{
+		m_Cancelled = p_Cancelled;
 	}
 }
