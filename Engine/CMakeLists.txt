@@ -6,19 +6,19 @@ message(STATUS "Setting up the Engine")
 option(SN_ENABLE_PROFILE "Enable or disable the profiling" ON)
 
 # Finding spdlog
-find_package(spdlog REQUIRED)
+find_package(spdlog CONFIG REQUIRED)
 
 # Finding OpenGL
 find_package(OpenGL REQUIRED)
 
 # Finding glfw3
-find_package(glfw3 REQUIRED)
+find_package(glfw3 CONFIG REQUIRED)
 
 # Finding glad
-find_package(glad REQUIRED)
+find_package(glad CONFIG REQUIRED)
 
 # Finding imgui
-find_package(imgui REQUIRED)
+find_package(imgui CONFIG REQUIRED)
 
 # Target
 set(TARGET_NAME Snailgine)
