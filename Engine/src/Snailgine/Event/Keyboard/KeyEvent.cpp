@@ -1,6 +1,7 @@
 #include "KeyEvent.hpp"
 
-namespace sn {
+namespace sn
+{
 	KeyEvent::KeyEvent(KeyCode p_KeyCode)
 	{
 		m_KeyCode = p_KeyCode;

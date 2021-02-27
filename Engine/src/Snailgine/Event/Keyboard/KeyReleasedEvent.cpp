@@ -2,7 +2,8 @@
 
 namespace sn
 {
-	KeyReleasedEvent::KeyReleasedEvent(KeyCode p_KeyCode) : KeyEvent(p_KeyCode)
+	KeyReleasedEvent::KeyReleasedEvent(KeyCode p_KeyCode)
+		: KeyEvent(p_KeyCode)
 	{
 
 	}

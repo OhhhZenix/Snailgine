@@ -27,6 +27,8 @@ add_library(
         src/Snailgine/Core/Application.cpp
         src/Snailgine/Core/Application.hpp
         src/Snailgine/Core/Base.hpp
+        src/Snailgine/Core/Input.cpp
+        src/Snailgine/Core/Input.hpp
         src/Snailgine/Core/KeyCode.hpp
         src/Snailgine/Core/Log.cpp
         src/Snailgine/Core/Log.hpp
@@ -88,12 +90,15 @@ add_library(
         src/Snailgine/Layer/Layer.hpp
         src/Snailgine/Layer/LayerStack.cpp
         src/Snailgine/Layer/LayerStack.hpp
+        src/Snailgine/Math/Vec2.hpp
         src/Snailgine/Math/Vec4.hpp
 )
 
 if (WIN32)
     target_sources(
             ${TARGET_NAME}
+            PRIVATE src/Snailgine/Platform/Windows/WindowsInput.cpp
+            PRIVATE src/Snailgine/Platform/Windows/WindowsInput.hpp
             PRIVATE src/Snailgine/Platform/Windows/WindowsWindow.cpp
             PRIVATE src/Snailgine/Platform/Windows/WindowsWindow.hpp
     )

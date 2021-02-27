@@ -1,7 +1,10 @@
 #include "MouseButtonReleasedEvent.hpp"
 
-namespace sn {
-	MouseButtonReleasedEvent::MouseButtonReleasedEvent(MouseCode p_Button) : MouseButtonEvent(p_Button) {
+namespace sn
+{
+	MouseButtonReleasedEvent::MouseButtonReleasedEvent(MouseCode p_Button)
+		: MouseButtonEvent(p_Button)
+	{
 
 	}
 

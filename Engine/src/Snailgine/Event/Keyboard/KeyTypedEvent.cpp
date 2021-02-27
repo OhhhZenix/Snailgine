@@ -2,7 +2,8 @@
 
 namespace sn
 {
-	KeyTypedEvent::KeyTypedEvent(KeyCode p_KeyCode) : KeyEvent(p_KeyCode)
+	KeyTypedEvent::KeyTypedEvent(KeyCode p_KeyCode)
+		: KeyEvent(p_KeyCode)
 	{
 
 	}

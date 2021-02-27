@@ -1,6 +1,7 @@
 #include "AppRenderEvent.hpp"
 
-namespace sn {
+namespace sn
+{
 	EventType AppRenderEvent::GetEventType() const
 	{
 		return EventType::AppRender;

@@ -1,6 +1,7 @@
 #include "AppTickEvent.hpp"
 
-namespace sn {
+namespace sn
+{
 	EventType AppTickEvent::GetEventType() const
 	{
 		return EventType::AppTick;

@@ -20,7 +20,6 @@ namespace sn
 			m_Function = p_Function;
 		}
 
-
 		void Call(Event& p_Event) override
 		{
 			(m_Instance->*m_Function)(static_cast<EventType&>(p_Event));

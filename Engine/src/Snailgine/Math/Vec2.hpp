@@ -1,41 +1,30 @@
 #pragma once
 
-#include "Snailgine/Core/Base.hpp"
-
-#define SQR(a) ((a) * (a))
-
-#define DISTANCE_FROM_ORIGIN(a, b, c, d) sqrt(SQR(a) + SQR(b) + SQR(c) + SQR(d))
-
-namespace sn
-{
+namespace sn {
 	template<typename T, typename DataType>
-	class Vec4
+	class Vec2
 	{
 	 protected:
 		__m128 m_Value;
 
-		explicit Vec4(DataType f_Scalar)
+		explicit Vec2(DataType f_Scalar)
 		{
-			m_Value = _mm_set_ps(f_Scalar, f_Scalar, f_Scalar, f_Scalar);
+			m_Value = _mm_set_ps(static_cast<DataType>(0), static_cast<DataType>(0), f_Scalar, f_Scalar);
 		}
 
-		Vec4(DataType p_X, DataType p_Y, DataType p_Z, DataType p_W)
+		Vec2(DataType p_X, DataType p_Y)
 		{
-			m_Value = _mm_set_ps(p_W, p_Z, p_Y, p_X);
+			m_Value = _mm_set_ps(static_cast<DataType>(0), static_cast<DataType>(0), p_Y, p_X);
 		}
 
-		Vec4(const Vec4& p_Vec)
+		Vec2(const Vec2& p_Vec)
 		{
 			m_Value = p_Vec.m_Value;
 		}
 
 		inline virtual T Normalized()
 		{
-			float f_Distance = DISTANCE_FROM_ORIGIN(this->operator[](0), this->operator[](1), this->operator[](2), this
-				->operator[](3));
-			return T(
-				this->operator[](0) / f_Distance,
-				this->operator[](1) / f_Distance, this->operator[](2) / f_Distance, this->operator[](3) / f_Distance);
+			return T(0);
 		}
 
 		inline virtual T& Add(const T& p_Other)
@@ -102,7 +91,7 @@ namespace sn
 			return this->Divide(p_Right);
 		}
 
-		inline virtual Vec4& operator=(const __m128& p_Other)
+		inline virtual Vec2& operator=(const __m128& p_Other)
 		{
 			m_Value = p_Other;
 			return *this;
@@ -111,16 +100,16 @@ namespace sn
 		virtual DataType operator[](size_t p_Index) = 0;
 	};
 
-	class Vec4f : public Vec4<Vec4f, float>
+	class Vec2f : public Vec2<Vec2f, float>
 	{
 	 public:
-		explicit Vec4f(float f_Scalar) : Vec4(f_Scalar)
+		explicit Vec2f(float f_Scalar) : Vec2(f_Scalar)
 		{
 
 		}
 
-		Vec4f(float p_X, float p_Y, float p_Z, float p_W)
-			: Vec4(p_X, p_Y, p_Z, p_W)
+		Vec2f(float p_X, float p_Y)
+			: Vec2(p_X, p_Y)
 		{
 
 		}

@@ -10,7 +10,8 @@
 #include "Snailgine/Event/Keyboard/KeyTypedEvent.hpp"
 #include "Snailgine/Event/Window/WindowResizeEvent.hpp"
 
-namespace sn {
+namespace sn
+{
 	class ImGuiLayer : public Layer
 	{
 	 public:

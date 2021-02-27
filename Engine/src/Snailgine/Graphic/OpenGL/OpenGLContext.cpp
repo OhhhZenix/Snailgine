@@ -26,7 +26,8 @@ namespace sn
 		SN_LOG_INFO("  Renderer: {0}", glGetString(GL_RENDERER));
 		SN_LOG_INFO("  Version: {0}", glGetString(GL_VERSION));
 
-		SN_LOG_ASSERT(GLVersion.major > 4 || (GLVersion.major == 4 && GLVersion.minor >= 5), "Snailgine requires at least OpenGL version 4.5!");
+		SN_LOG_ASSERT(GLVersion.major > 4 || (GLVersion.major == 4 && GLVersion.minor
+																	  >= 5), "Snailgine requires at least OpenGL version 4.5!");
 	}
 
 	void OpenGLContext::SwapBuffers()

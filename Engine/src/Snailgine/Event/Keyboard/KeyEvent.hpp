@@ -3,7 +3,8 @@
 #include "Snailgine/Core/KeyCode.hpp"
 #include "Snailgine/Event/Event.hpp"
 
-namespace sn {
+namespace sn
+{
 	class KeyEvent : public Event
 	{
 	 private:

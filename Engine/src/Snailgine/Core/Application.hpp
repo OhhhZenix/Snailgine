@@ -5,8 +5,9 @@
 #include "Snailgine/Event/Window/WindowResizeEvent.hpp"
 #include "Snailgine/Layer/LayerStack.hpp"
 
-namespace sn {
-	 void Init();
+namespace sn
+{
+	void Init();
 
 	class Application
 	{

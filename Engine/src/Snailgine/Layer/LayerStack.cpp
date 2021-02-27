@@ -9,8 +9,10 @@ namespace sn
 
 	LayerStack::~LayerStack()
 	{
-		if (!m_Layers.empty()) {
-			for (Layer* f_Layer : m_Layers) {
+		if (!m_Layers.empty())
+		{
+			for (Layer* f_Layer : m_Layers)
+			{
 				f_Layer->OnDetach();
 				delete f_Layer;
 			}

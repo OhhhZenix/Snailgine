@@ -1,14 +1,17 @@
 #include "Application.hpp"
 
+#include "Snailgine/Core/Input.hpp"
 #include "Snailgine/Event/EventBus.hpp"
 #include "Snailgine/Graphic/Renderer.hpp"
 #include "Snailgine/ImGui/ImGuiLayer.hpp"
+#include "Snailgine/Math/Vec4.hpp"
 
 namespace sn
 {
 	void Init()
 	{
 		Log::Init();
+		Input::Init();
 		Application::Instance().Init();
 		SN_LOG_INFO("Initialized all systems...");
 	}
@@ -22,6 +25,7 @@ namespace sn
 
 	Application::~Application()
 	{
+		Input::Shutdown();
 		Renderer::Shutdown();
 		delete m_Window;
 	}
@@ -41,6 +45,9 @@ namespace sn
 		EventBus::Instance().Subscribe(this, &Application::OnWindowResizeEvent);
 
 		PushOverlay(new ImGuiLayer());
+
+		auto f_Vec = Vec4f(1);
+		SN_LOG_INFO("{} {} {} {}", f_Vec[0], f_Vec[1], f_Vec[2], f_Vec[3]);
 	}
 
 	void Application::Run()
@@ -54,13 +61,19 @@ namespace sn
 				RenderCommand::SetClearColor(0.64f, 0.64f, 0.64f, 1.0f);
 				RenderCommand::Clear();
 
-				if (!m_Minimized) {
-					for (Layer* f_Layer : m_LayerStack.GetLayers()) {
+				if (!m_Minimized)
+				{
+					for (Layer* f_Layer : m_LayerStack.GetLayers())
+					{
 						if (!f_Layer->IsEnabled())
 							continue;
 						f_Layer->ProcessUpdate(f_DeltaTime);
 					}
 				}
+
+				auto f_Position = Input::GetMousePosition();
+
+				SN_LOG_TRACE("{}, {}", f_Position[0], f_Position[1]);
 
 				m_Window->ProcessUpdate();
 			}
@@ -95,7 +108,8 @@ namespace sn
 
 	void Application::OnWindowResizeEvent(WindowResizeEvent& p_Event)
 	{
-		SN_LOG_INFO("Application::OnWindowResizeEvent received {} with Width {}, Height {}", p_Event.GetEventType(), p_Event.GetWidth(), p_Event.GetHeight());
+		SN_LOG_INFO("Application::OnWindowResizeEvent received {} with Width {}, Height {}", p_Event
+			.GetEventType(), p_Event.GetWidth(), p_Event.GetHeight());
 
 		if (p_Event.GetWidth() == 0 || p_Event.GetHeight() == 0)
 		{

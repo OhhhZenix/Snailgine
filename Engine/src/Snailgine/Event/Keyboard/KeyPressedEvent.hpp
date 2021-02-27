@@ -2,7 +2,8 @@
 
 #include "KeyEvent.hpp"
 
-namespace sn {
+namespace sn
+{
 	class KeyPressedEvent : public KeyEvent
 	{
 	 private:

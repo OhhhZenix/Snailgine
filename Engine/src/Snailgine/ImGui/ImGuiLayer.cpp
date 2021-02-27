@@ -61,7 +61,8 @@ namespace sn
 	void ImGuiLayer::ProcessUpdate(float p_DeltaTime)
 	{
 		ImGuiIO& f_IO = ImGui::GetIO();
-		f_IO.DisplaySize = ImVec2(Application::Instance().GetWindow().GetWidth(), Application::Instance().GetWindow().GetHeight());
+		f_IO.DisplaySize = ImVec2(Application::Instance().GetWindow().GetWidth(), Application::Instance().GetWindow()
+			.GetHeight());
 		f_IO.DeltaTime = p_DeltaTime;
 
 		ImGui_ImplOpenGL3_NewFrame();
@@ -76,11 +77,8 @@ namespace sn
 
 	void ImGuiLayer::OnMouseButtonPressedEvent(MouseButtonPressedEvent& p_Event)
 	{
-		SN_LOG_INFO("PRESSED {}", p_Event.GetButton());
 		ImGuiIO f_IO = ImGui::GetIO();
-		SN_LOG_INFO("IMGUI PRSSED {}", f_IO.MouseDown[static_cast<int>(p_Event.GetButton())]);
 		f_IO.MouseDown[static_cast<int>(p_Event.GetButton())] = true;
-		SN_LOG_INFO("IMGUI PRSSED {}", f_IO.MouseDown[static_cast<int>(p_Event.GetButton())]);
 	}
 
 	void ImGuiLayer::OnMouseButtonReleasedEvent(MouseButtonReleasedEvent& p_Event)
@@ -91,7 +89,6 @@ namespace sn
 
 	void ImGuiLayer::OnMouseMovedEvent(MouseMovedEvent& p_Event)
 	{
-		SN_LOG_INFO("{} {}", p_Event.GetX(), p_Event.GetY());
 		ImGuiIO f_IO = ImGui::GetIO();
 		f_IO.MousePos = ImVec2(p_Event.GetX(), p_Event.GetY());
 	}

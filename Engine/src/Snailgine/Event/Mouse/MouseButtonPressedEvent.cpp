@@ -1,7 +1,9 @@
 #include "MouseButtonPressedEvent.hpp"
 
-namespace sn {
-	MouseButtonPressedEvent::MouseButtonPressedEvent(MouseCode p_Button) : MouseButtonEvent(p_Button)
+namespace sn
+{
+	MouseButtonPressedEvent::MouseButtonPressedEvent(MouseCode p_Button)
+		: MouseButtonEvent(p_Button)
 	{
 
 	}

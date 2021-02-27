@@ -2,7 +2,8 @@
 
 #include "Snailgine/Event/Event.hpp"
 
-namespace sn {
+namespace sn
+{
 	class MouseMovedEvent : public Event
 	{
 	 private:

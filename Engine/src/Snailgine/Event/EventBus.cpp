@@ -15,7 +15,8 @@ namespace sn
 			{
 				if (f_Value.empty())
 					continue;
-				for (EventBaseFunction* f_Item : f_Value) {
+				for (EventBaseFunction* f_Item : f_Value)
+				{
 					delete f_Item;
 				}
 				f_Value.clear();

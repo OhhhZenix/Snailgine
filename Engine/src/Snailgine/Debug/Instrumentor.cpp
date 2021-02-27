@@ -119,7 +119,9 @@ namespace sn
 	{
 		auto f_EndTimePoint = std::chrono::steady_clock::now();
 		auto f_HighResStart = FloatingPointMicroseconds{ m_StartTimePoint.time_since_epoch() };
-		auto f_ElapsedTime = std::chrono::time_point_cast<std::chrono::microseconds>(f_EndTimePoint).time_since_epoch() - std::chrono::time_point_cast<std::chrono::microseconds>(m_StartTimePoint).time_since_epoch();
+		auto f_ElapsedTime = std::chrono::time_point_cast<std::chrono::microseconds>(f_EndTimePoint).time_since_epoch()
+							 - std::chrono::time_point_cast<std::chrono::microseconds>(m_StartTimePoint)
+								 .time_since_epoch();
 
 		Instrumentor::Instance().WriteProfile({ m_Name, f_HighResStart, f_ElapsedTime, std::this_thread::get_id() });
 

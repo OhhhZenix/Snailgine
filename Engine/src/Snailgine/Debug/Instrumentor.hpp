@@ -134,8 +134,8 @@ namespace sn
 #define SN_PROFILE_BEGIN_SESSION(p_Name, p_FilePath) ::sn::Instrumentor::Instance().BeginSession(p_Name, p_FilePath)
 #define SN_PROFILE_END_SESSION()                     ::sn::Instrumentor::Instance().EndSession()
 #define SN_PROFILE_SCOPE_LINE2(p_Name, p_Line) \
-                                                     constexpr auto fixedName##line = ::sn::InstrumentorUtils::CleanupOutputString(p_Name, "__cdecl "); \
-                                                     ::sn::InstrumentationTimer timer##line(fixedName##line.Data)
+													 constexpr auto fixedName##line = ::sn::InstrumentorUtils::CleanupOutputString(p_Name, "__cdecl "); \
+													 ::sn::InstrumentationTimer timer##line(fixedName##line.Data)
 #define SN_PROFILE_SCOPE_LINE(p_Name, p_Line)        SN_PROFILE_SCOPE_LINE2(p_Name, p_Line)
 #define SN_PROFILE_SCOPE(p_Name)                     SN_PROFILE_SCOPE_LINE(p_Name, __LINE__)
 #define SN_PROFILE_FUNCTION()                        SN_PROFILE_SCOPE(SN_FUNC_SIG)

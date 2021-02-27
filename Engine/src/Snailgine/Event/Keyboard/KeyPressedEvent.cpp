@@ -1,7 +1,9 @@
 #include "KeyPressedEvent.hpp"
 
-namespace sn {
-	KeyPressedEvent::KeyPressedEvent(KeyCode p_KeyCode, uint16_t p_RepeatCount) : KeyEvent(p_KeyCode)
+namespace sn
+{
+	KeyPressedEvent::KeyPressedEvent(KeyCode p_KeyCode, uint16_t p_RepeatCount)
+		: KeyEvent(p_KeyCode)
 	{
 		m_RepeatCount = p_RepeatCount;
 	}

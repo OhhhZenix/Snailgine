@@ -1,6 +1,7 @@
 #include "AppUpdateEvent.hpp"
 
-namespace sn {
+namespace sn
+{
 	EventType AppUpdateEvent::GetEventType() const
 	{
 		return EventType::AppUpdate;

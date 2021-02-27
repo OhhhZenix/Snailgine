@@ -30,11 +30,11 @@ namespace sn
 
 	EventCategory operator^(EventCategory p_Left, EventCategory p_Right);
 
-	EventCategory &operator|=(EventCategory &p_Left, EventCategory p_Right);
+	EventCategory& operator|=(EventCategory& p_Left, EventCategory p_Right);
 
-	EventCategory &operator&=(EventCategory &p_Left, EventCategory p_Right);
+	EventCategory& operator&=(EventCategory& p_Left, EventCategory p_Right);
 
-	EventCategory &operator^=(EventCategory &p_Left, EventCategory p_Right);
+	EventCategory& operator^=(EventCategory& p_Left, EventCategory p_Right);
 
 	EventCategory operator~(EventCategory p_Category);
 
