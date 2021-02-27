@@ -2,74 +2,94 @@
 
 #include "Snailgine/Core/Base.hpp"
 
+#define SQR(a) ((a) * (a))
+
+#define DISTANCE_FROM_ORIGIN(a, b, c, d) sqrt(SQR(a) + SQR(b) + SQR(c) + SQR(d))
+
 namespace sn
 {
-	template<typename T, typename DataType>
-	class Vec4
+	class Vec4f
 	{
-	 protected:
-		__m128 m_Value;
+	 private:
+		__m128 m_Value{};
 
 	 public:
-		explicit Vec4(DataType p_X = static_cast<DataType>(0), DataType p_Y = static_cast<DataType>(0), DataType p_Z = static_cast<DataType>(0), DataType p_W = static_cast<DataType>(0))
+		Vec4f(float p_X, float p_Y, float p_Z, float p_W)
 		{
-			m_Value = _mm_set_ps(p_X, p_Y, p_Z, p_W);
+			m_Value = _mm_set_ps(p_W, p_Z, p_Y, p_X);
 		}
 
-		inline T& operator=(const __m128& p_Other)
+		Vec4f(const Vec4f& p_Vec) {
+			m_Value = p_Vec.m_Value;
+		}
+
+		inline Vec4f& operator=(const __m128& p_Other)
 		{
 			m_Value = p_Other;
 			return *this;
 		}
 
-		inline explicit operator __m128() const
-		{
-			return m_Value;
-		}
-
-		virtual DataType operator[](size_t p_Index) = 0;
-
-		inline T operator+(const T& p_Other)
-		{
-			return _mm_add_ps(&this, p_Other);
-		}
-
-		inline T operator-(const T& p_Other)
-		{
-			return _mm_sub_ps(&this, p_Other);
-		}
-
-		inline T operator*(const T& p_Other)
-		{
-			return _mm_mul_ps(&this, p_Other);
-		}
-
-		inline T operator/(const T& p_Other)
-		{
-			return _mm_div_ps(&this, p_Other);
-		}
-	};
-
-	class Vec4f : public Vec4<Vec4f, float>
-	{
-	 public:
-		float operator[](size_t p_Index) override
+		inline float operator[](size_t p_Index)
 		{
 			return m_Value.m128_f32[p_Index];
 		}
-	};
 
-	class Vec4i : public Vec4<Vec4i, uint32_t>
-	{
-	 public:
-		explicit Vec4i(uint32_t p_X = 0, uint32_t p_Y = 0, uint32_t p_Z = 0, uint32_t p_W = 0)
-			: Vec4<Vec4i, uint32_t>(p_X, p_Y, p_Z, p_W)
-		{
+		inline Vec4f& Add(const Vec4f& p_Other) {
+			m_Value = _mm_add_ps(this->m_Value, p_Other.m_Value);
+			return *this;
 		}
 
-		uint32_t operator[](size_t p_Index) override
+		inline Vec4f& Subtract(const Vec4f& p_Other) {
+			m_Value = _mm_sub_ps(this->m_Value, p_Other.m_Value);
+			return *this;
+		}
+
+		inline Vec4f& Multiply(const Vec4f& p_Other) {
+			m_Value = _mm_mul_ps(this->m_Value, p_Other.m_Value);
+			return *this;
+		}
+
+		inline Vec4f& Divide(const Vec4f& p_Other) {
+			m_Value = _mm_div_ps(this->m_Value, p_Other.m_Value);
+			return *this;
+		}
+
+		inline Vec4f operator+(const Vec4f& p_Other) {
+			return Vec4f(this->Add(p_Other));
+		}
+
+		inline Vec4f operator-(const Vec4f& p_Other) {
+			return Vec4f(this->Subtract(p_Other));
+		}
+
+		inline Vec4f operator*(const Vec4f& p_Other) {
+			return Vec4f(this->Multiply(p_Other));
+		}
+
+		inline Vec4f operator/(const Vec4f& p_Other) {
+			return Vec4f(this->Divide(p_Other));
+		}
+
+		inline Vec4f& operator+=(const Vec4f& p_Right) {
+			return this->Add(p_Right);
+		}
+
+		inline Vec4f& operator-=(const Vec4f& p_Right) {
+			return this->Subtract(p_Right);
+		}
+
+		inline Vec4f& operator*=(const Vec4f& p_Right) {
+			return this->Multiply(p_Right);
+		}
+
+		inline Vec4f& operator/=(const Vec4f& p_Right) {
+			return this->Divide(p_Right);
+		}
+
+		inline Vec4f Normalized()
 		{
-			return m_Value.m128_f32[p_Index];
+			float f_Distance = DISTANCE_FROM_ORIGIN(this->operator[](0), this->operator[](1), this->operator[](2), this->operator[](3));
+			return Vec4f(this->operator[](0) / f_Distance, this->operator[](1) / f_Distance, this->operator[](2) / f_Distance, this->operator[](3) / f_Distance);
 		}
 	};
 }
