@@ -22,6 +22,11 @@ namespace sn
 
 	}
 
+	void Layer::ProcessRender()
+	{
+
+	}
+
 	bool Layer::IsEnabled() const
 	{
 		return m_Enabled;

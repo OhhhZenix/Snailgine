@@ -4,6 +4,7 @@
 #include "Snailgine/Event/Window/WindowCloseEvent.hpp"
 #include "Snailgine/Event/Window/WindowResizeEvent.hpp"
 #include "Snailgine/Layer/LayerStack.hpp"
+#include "Snailgine/ImGui/ImGuiLayer.hpp"
 
 namespace sn
 {
@@ -13,6 +14,7 @@ namespace sn
 	{
 	 private:
 		Window* m_Window;
+		ImGuiLayer* m_ImGuiLayer;
 		LayerStack m_LayerStack;
 		bool m_Running;
 		bool m_Minimized;

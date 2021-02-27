@@ -95,7 +95,7 @@ namespace sn
 
 	void CursorPosCallback(GLFWwindow* p_Window, double p_X, double p_Y)
 	{
-		MouseMovedEvent f_Event = MouseMovedEvent(static_cast<float>(p_X), static_cast<float>(p_Y));
+		MouseMovedEvent f_Event = MouseMovedEvent((float)(p_X), (float)(p_Y));
 		EventBus::Instance().Publish(f_Event);
 	}
 

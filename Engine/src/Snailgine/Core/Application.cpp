@@ -3,8 +3,6 @@
 #include "Snailgine/Core/Input.hpp"
 #include "Snailgine/Event/EventBus.hpp"
 #include "Snailgine/Graphic/Renderer.hpp"
-#include "Snailgine/ImGui/ImGuiLayer.hpp"
-#include "Snailgine/Math/Vec4.hpp"
 
 namespace sn
 {
@@ -19,6 +17,7 @@ namespace sn
 	Application::Application()
 	{
 		m_Window = Window::Create();
+		m_ImGuiLayer = new ImGuiLayer();
 		m_Running = true;
 		m_Minimized = false;
 	}
@@ -44,10 +43,7 @@ namespace sn
 		EventBus::Instance().Subscribe(this, &Application::OnWindowCloseEvent);
 		EventBus::Instance().Subscribe(this, &Application::OnWindowResizeEvent);
 
-		PushOverlay(new ImGuiLayer());
-
-		auto f_Vec = Vec4f(1);
-		SN_LOG_INFO("{} {} {} {}", f_Vec[0], f_Vec[1], f_Vec[2], f_Vec[3]);
+		PushOverlay(m_ImGuiLayer);
 	}
 
 	void Application::Run()
@@ -55,7 +51,6 @@ namespace sn
 		float f_DeltaTime = 0;
 		while (m_Running)
 		{
-			// SN_LOG_INFO("DeltaTime: {}", f_DeltaTime);
 			auto f_Start = std::chrono::high_resolution_clock::now();
 			{
 				RenderCommand::SetClearColor(0.64f, 0.64f, 0.64f, 1.0f);
@@ -63,17 +58,21 @@ namespace sn
 
 				if (!m_Minimized)
 				{
-					for (Layer* f_Layer : m_LayerStack.GetLayers())
+					if (!m_LayerStack.GetLayers().empty())
 					{
-						if (!f_Layer->IsEnabled())
-							continue;
-						f_Layer->ProcessUpdate(f_DeltaTime);
+						for (Layer* f_Layer : m_LayerStack.GetLayers())
+						{
+							if (!f_Layer->IsEnabled())
+								continue;
+
+							f_Layer->ProcessUpdate(f_DeltaTime);
+
+							m_ImGuiLayer->Begin();
+							f_Layer->ProcessRender();
+							m_ImGuiLayer->End();
+						}
 					}
 				}
-
-				auto f_Position = Input::GetMousePosition();
-
-				SN_LOG_TRACE("{}, {}", f_Position[0], f_Position[1]);
 
 				m_Window->ProcessUpdate();
 			}
