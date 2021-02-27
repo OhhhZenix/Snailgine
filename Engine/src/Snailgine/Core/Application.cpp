@@ -3,7 +3,6 @@
 #include "Snailgine/Event/EventBus.hpp"
 #include "Snailgine/Graphic/Renderer.hpp"
 #include "Snailgine/ImGui/ImGuiLayer.hpp"
-#include "Snailgine/Math/Vec4.hpp"
 
 namespace sn
 {
@@ -42,9 +41,6 @@ namespace sn
 		EventBus::Instance().Subscribe(this, &Application::OnWindowResizeEvent);
 
 		PushOverlay(new ImGuiLayer());
-
-		Vec4i some_Vec = {1 ,2 , 3, 4};
-		SN_LOG_INFO("{} {} {} {}", some_Vec[0], some_Vec[1], some_Vec[2], some_Vec[3]);
 	}
 
 	void Application::Run()

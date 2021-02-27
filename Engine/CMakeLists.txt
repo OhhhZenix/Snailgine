@@ -106,7 +106,7 @@ target_include_directories(${TARGET_NAME} PUBLIC src)
 target_precompile_headers(${TARGET_NAME} PRIVATE src/Snailgine/PCH.hpp)
 
 # Linking spdlog
-target_link_libraries(${TARGET_NAME} PRIVATE spdlog::spdlog spdlog::spdlog_header_only)
+target_link_libraries(${TARGET_NAME} PUBLIC spdlog::spdlog spdlog::spdlog_header_only)
 
 # Linking OpenGL
 target_link_libraries(${TARGET_NAME} PRIVATE OpenGL::GL)

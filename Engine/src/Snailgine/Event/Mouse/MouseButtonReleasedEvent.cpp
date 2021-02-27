@@ -1,5 +1,12 @@
-//
-// Created by Zenix on 2/26/2021.
-//
-
 #include "MouseButtonReleasedEvent.hpp"
+
+namespace sn {
+	MouseButtonReleasedEvent::MouseButtonReleasedEvent(MouseCode p_Button) : MouseButtonEvent(p_Button) {
+
+	}
+
+	EventType MouseButtonReleasedEvent::GetEventType() const
+	{
+		return EventType::MouseButtonReleased;
+	}
+}

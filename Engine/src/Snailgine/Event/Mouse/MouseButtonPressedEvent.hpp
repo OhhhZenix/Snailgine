@@ -1,13 +1,14 @@
-//
-// Created by Zenix on 2/26/2021.
-//
+#pragma once
 
-#ifndef _MOUSEBUTTONPRESSEDEVENT_HPP_
-#define _MOUSEBUTTONPRESSEDEVENT_HPP_
+#include "Snailgine/Event/Mouse/MouseButtonEvent.hpp"
 
-class MouseButtonPressedEvent
+namespace sn
 {
+	class MouseButtonPressedEvent : public MouseButtonEvent
+	{
+	 public:
+		explicit MouseButtonPressedEvent(MouseCode p_Button);
 
-};
-
-#endif //_MOUSEBUTTONPRESSEDEVENT_HPP_
+		[[nodiscard]] EventType GetEventType() const override;
+	};
+}

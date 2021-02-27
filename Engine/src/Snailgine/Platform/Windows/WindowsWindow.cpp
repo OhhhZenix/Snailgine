@@ -3,6 +3,13 @@
 #include "Snailgine/Event/EventBus.hpp"
 #include "Snailgine/Event/Window/WindowCloseEvent.hpp"
 #include "Snailgine/Event/Window/WindowResizeEvent.hpp"
+#include "Snailgine/Event/Keyboard/KeyPressedEvent.hpp"
+#include "Snailgine/Event/Keyboard/KeyReleasedEvent.hpp"
+#include "Snailgine/Event/Keyboard/KeyTypedEvent.hpp"
+#include "Snailgine/Event/Mouse/MouseButtonPressedEvent.hpp"
+#include "Snailgine/Event/Mouse/MouseButtonReleasedEvent.hpp"
+#include "Snailgine/Event/Mouse/MouseScrolledEvent.hpp"
+#include "Snailgine/Event/Mouse/MouseMovedEvent.hpp"
 
 namespace sn
 {
@@ -23,6 +30,72 @@ namespace sn
 		f_Settings->Width = p_Width;
 		f_Settings->Height = p_Height;
 		WindowResizeEvent f_Event = WindowResizeEvent(p_Width, p_Height);
+		EventBus::Instance().Publish(f_Event);
+	}
+
+	void KeyCallback(GLFWwindow* p_Window, int p_Key, int p_Scancode, int p_Action, int p_Mods)
+	{
+		switch (p_Action)
+		{
+		case GLFW_PRESS:
+		{
+			KeyPressedEvent f_Event = KeyPressedEvent(static_cast<KeyCode>(p_Key), 0);
+			EventBus::Instance().Publish(f_Event);
+			break;
+		}
+		case GLFW_RELEASE:
+		{
+			KeyReleasedEvent f_Event = KeyReleasedEvent(static_cast<KeyCode>(p_Key));
+			EventBus::Instance().Publish(f_Event);
+			break;
+		}
+		case GLFW_REPEAT:
+		{
+			KeyPressedEvent f_Event = KeyPressedEvent(static_cast<KeyCode>(p_Key), 1);
+			EventBus::Instance().Publish(f_Event);
+			break;
+		}
+		default:
+			break;
+		}
+	}
+
+	void CharCallback(GLFWwindow* p_Window, unsigned int p_Keycode)
+	{
+		KeyTypedEvent f_Event = KeyTypedEvent(static_cast<KeyCode>(p_Keycode));
+		EventBus::Instance().Publish(f_Event);
+	}
+
+	void MouseButtonCallback(GLFWwindow* p_Window, int p_Button, int p_Action, int p_Mods)
+	{
+		switch (p_Action)
+		{
+		case GLFW_PRESS:
+		{
+			MouseButtonPressedEvent f_Event = MouseButtonPressedEvent(static_cast<MouseCode>(p_Button));
+			EventBus::Instance().Publish(f_Event);
+			break;
+		}
+		case GLFW_RELEASE:
+		{
+			MouseButtonReleasedEvent f_Event = MouseButtonReleasedEvent(static_cast<MouseCode>(p_Button));
+			EventBus::Instance().Publish(f_Event);
+			break;
+		}
+		default:
+			break;
+		}
+	}
+
+	void ScrollCallback(GLFWwindow* p_Window, double p_XOffset, double p_YOffset)
+	{
+		MouseScrolledEvent f_Event = MouseScrolledEvent(static_cast<float>(p_XOffset), static_cast<float>(p_YOffset));
+		EventBus::Instance().Publish(f_Event);
+	}
+
+	void CursorPosCallback(GLFWwindow* p_Window, double p_X, double p_Y)
+	{
+		MouseMovedEvent f_Event = MouseMovedEvent(static_cast<float>(p_X), static_cast<float>(p_Y));
 		EventBus::Instance().Publish(f_Event);
 	}
 
@@ -77,6 +150,11 @@ namespace sn
 		// Callbacks
 		glfwSetWindowCloseCallback(static_cast<GLFWwindow*>(m_Handle), WindowCloseCallback);
 		glfwSetWindowSizeCallback(static_cast<GLFWwindow*>(m_Handle), WindowSizeCallback);
+		glfwSetKeyCallback(static_cast<GLFWwindow*>(m_Handle), KeyCallback);
+		glfwSetCharCallback(static_cast<GLFWwindow*>(m_Handle), CharCallback);
+		glfwSetMouseButtonCallback(static_cast<GLFWwindow*>(m_Handle), MouseButtonCallback);
+		glfwSetScrollCallback(static_cast<GLFWwindow*>(m_Handle), ScrollCallback);
+		glfwSetCursorPosCallback(static_cast<GLFWwindow*>(m_Handle), CursorPosCallback);
 	}
 
 	void WindowsWindow::ProcessUpdate()

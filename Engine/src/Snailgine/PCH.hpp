@@ -14,6 +14,7 @@
 #include <mutex>
 #include <sstream>
 #include <string>
+#include <cmath>
 #include <cstdlib>
 #include <cstdint>
 #include <cassert>

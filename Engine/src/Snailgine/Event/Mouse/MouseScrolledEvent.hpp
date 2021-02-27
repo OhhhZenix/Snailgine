@@ -1,13 +1,23 @@
-//
-// Created by Zenix on 2/26/2021.
-//
+#pragma once
 
-#ifndef _MOUSESCROLLEDEVENT_HPP_
-#define _MOUSESCROLLEDEVENT_HPP_
+#include "Snailgine/Event/Event.hpp"
 
-class MouseScrolledEvent
-{
+namespace sn {
+	class MouseScrolledEvent : public Event
+	{
+	 private:
+		float m_XOffset;
+		float m_YOffset;
 
-};
+	 public:
+		MouseScrolledEvent(float p_XOffset, float p_YOffset);
 
-#endif //_MOUSESCROLLEDEVENT_HPP_
+		[[nodiscard]] float GetXOffset() const;
+
+		[[nodiscard]] float GetYOffset() const;
+
+		[[nodiscard]] EventType GetEventType() const override;
+
+		[[nodiscard]] EventCategory GetEventCategory() const override;
+	};
+}
