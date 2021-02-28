@@ -72,6 +72,10 @@ add_library(
         src/Snailgine/Event/EventBus.cpp
         src/Snailgine/Event/EventBus.hpp
         src/Snailgine/Event/EventMemberFunction.hpp
+        src/Snailgine/Graphic/OpenGL/OpenGL.cpp
+        src/Snailgine/Graphic/OpenGL/OpenGL.hpp
+        src/Snailgine/Graphic/OpenGL/OpenGLContext.cpp
+        src/Snailgine/Graphic/OpenGL/OpenGLContext.hpp
         src/Snailgine/Graphic/Context.cpp
         src/Snailgine/Graphic/Context.hpp
         src/Snailgine/Graphic/Graphic.cpp
@@ -80,10 +84,8 @@ add_library(
         src/Snailgine/Graphic/RenderCommand.hpp
         src/Snailgine/Graphic/Renderer.cpp
         src/Snailgine/Graphic/Renderer.hpp
-        src/Snailgine/Graphic/OpenGL/OpenGL.cpp
-        src/Snailgine/Graphic/OpenGL/OpenGL.hpp
-        src/Snailgine/Graphic/OpenGL/OpenGLContext.cpp
-        src/Snailgine/Graphic/OpenGL/OpenGLContext.hpp
+        src/Snailgine/Graphic/Shader.cpp
+        src/Snailgine/Graphic/Shader.hpp
         src/Snailgine/ImGui/ImGuiLayer.cpp
         src/Snailgine/ImGui/ImGuiLayer.hpp
         src/Snailgine/Layer/Layer.cpp
@@ -123,31 +125,31 @@ target_link_libraries(${TARGET_NAME} PRIVATE glfw)
 target_link_libraries(${TARGET_NAME} PRIVATE glad::glad)
 
 # Linking imgui
-target_link_libraries(${TARGET_NAME} PRIVATE imgui::imgui)
+target_link_libraries(${TARGET_NAME} PUBLIC imgui::imgui)
 
 # Custom definitions
 target_compile_definitions(${TARGET_NAME} PRIVATE "GLFW_INCLUDE_NONE")
 
 if (CMAKE_BUILD_TYPE STREQUAL "Debug")
-    target_compile_definitions(${TARGET_NAME} PRIVATE "SN_BUILD_DEBUG=1")
+    target_compile_definitions(${TARGET_NAME} PUBLIC "SN_BUILD_DEBUG=1")
 else ()
-    target_compile_definitions(${TARGET_NAME} PRIVATE "SN_BUILD_DEBUG=0")
+    target_compile_definitions(${TARGET_NAME} PUBLIC "SN_BUILD_DEBUG=0")
 endif ()
 
 if (CMAKE_BUILD_TYPE STREQUAL "Release")
-    target_compile_definitions(${TARGET_NAME} PRIVATE "SN_BUILD_RELEASE=1")
+    target_compile_definitions(${TARGET_NAME} PUBLIC "SN_BUILD_RELEASE=1")
 else ()
-    target_compile_definitions(${TARGET_NAME} PRIVATE "SN_BUILD_RELEASE=0")
+    target_compile_definitions(${TARGET_NAME} PUBLIC "SN_BUILD_RELEASE=0")
 endif ()
 
 if (WIN32)
-    target_compile_definitions(${TARGET_NAME} PRIVATE "SN_PLATFORM_WINDOW=1")
+    target_compile_definitions(${TARGET_NAME} PUBLIC "SN_PLATFORM_WINDOW=1")
 else ()
-    target_compile_definitions(${TARGET_NAME} PRIVATE "SN_PLATFORM_WINDOW=0")
+    target_compile_definitions(${TARGET_NAME} PUBLIC "SN_PLATFORM_WINDOW=0")
 endif ()
 
 if (SN_ENABLE_PROFILE EQUAL ON)
-    target_compile_definitions(${TARGET_NAME} PRIVATE "SN_PROFILE=1")
+    target_compile_definitions(${TARGET_NAME} PUBLIC "SN_PROFILE=1")
 else ()
-    target_compile_definitions(${TARGET_NAME} PRIVATE "SN_PROFILE=0")
+    target_compile_definitions(${TARGET_NAME} PUBLIC "SN_PROFILE=0")
 endif ()
