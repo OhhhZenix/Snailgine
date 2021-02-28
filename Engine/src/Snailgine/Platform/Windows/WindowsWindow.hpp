@@ -18,8 +18,6 @@ namespace sn
 
 		~WindowsWindow() override;
 
-		void Init() override;
-
 		void ProcessUpdate() override;
 
 		void* GetHandle() override;

@@ -3,7 +3,10 @@
 #include <imgui.h>
 #include <imgui_impl_glfw.h>
 #include <imgui_impl_opengl3.h>
+
+// Temp
 #include <GLFW/glfw3.h>
+
 #include "Snailgine/Core/Application.hpp"
 
 namespace sn
@@ -16,11 +19,11 @@ namespace sn
 		ImGuiIO& f_IO = ImGui::GetIO();
 		(void)f_IO;
 		f_IO.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;       // Enable Keyboard Controls
-		//io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;      // Enable Gamepad Controls
-		//f_IO.ConfigFlags |= ImGuiConfigFlags_DockingEnable;           // Enable Docking
-		//f_IO.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;         // Enable Multi-Viewport / Platform Windows
-		//io.ConfigFlags |= ImGuiConfigFlags_ViewportsNoTaskBarIcons;
-		//io.ConfigFlags |= ImGuiConfigFlags_ViewportsNoMerge;
+		// f_IO.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;        // Enable Gamepad Controls
+		f_IO.ConfigFlags |= ImGuiConfigFlags_DockingEnable;           // Enable Docking
+		f_IO.ConfigFlags |= ImGuiConfigFlags_ViewportsEnable;         // Enable Multi-Viewport / Platform Windows
+		// f_IO.ConfigFlags |= ImGuiConfigFlags_ViewportsNoTaskBarIcons;
+		// f_IO.ConfigFlags |= ImGuiConfigFlags_ViewportsNoMerge;
 
 		// Setup Dear ImGui style
 		ImGui::StyleColorsDark();
@@ -28,7 +31,7 @@ namespace sn
 
 		// When viewports are enabled we tweak WindowRounding/WindowBg so platform windows can look identical to regular ones.
 		ImGuiStyle& f_Style = ImGui::GetStyle();
-		if (f_IO.ConfigFlags /*& ImGuiConfigFlags_ViewportsEnable*/)
+		if (f_IO.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
 		{
 			f_Style.WindowRounding = 0.0f;
 			f_Style.Colors[ImGuiCol_WindowBg].w = 1.0f;
@@ -72,11 +75,11 @@ namespace sn
 		ImGui::Render();
 		ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
-		if (f_IO.ConfigFlags /*& ImGuiConfigFlags_ViewportsEnable*/)
+		if (f_IO.ConfigFlags & ImGuiConfigFlags_ViewportsEnable)
 		{
 			GLFWwindow* f_BackupCurrentContext = glfwGetCurrentContext();
-			// ImGui::UpdatePlatformWindows();
-			// ImGui::RenderPlatformWindowsDefault();
+			ImGui::UpdatePlatformWindows();
+			ImGui::RenderPlatformWindowsDefault();
 			glfwMakeContextCurrent(f_BackupCurrentContext);
 		}
 	}

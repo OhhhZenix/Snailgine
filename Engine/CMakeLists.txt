@@ -3,7 +3,8 @@ project(Snailgine-Engine)
 message(STATUS "Setting up the Engine")
 
 # Options
-option(SN_ENABLE_PROFILE "Enable or disable the profiling" ON)
+set(SN_ENABLE_PROFILE ON CACHE BOOL "Enable or disable the profiling" FORCE)
+set(SN_GRAPHIC_BACKEND "OpenGL" CACHE STRING "Chooses which graphics backend to use" FORCE)
 
 # Finding spdlog
 find_package(spdlog CONFIG REQUIRED)
@@ -72,10 +73,6 @@ add_library(
         src/Snailgine/Event/EventBus.cpp
         src/Snailgine/Event/EventBus.hpp
         src/Snailgine/Event/EventMemberFunction.hpp
-        src/Snailgine/Graphic/OpenGL/OpenGL.cpp
-        src/Snailgine/Graphic/OpenGL/OpenGL.hpp
-        src/Snailgine/Graphic/OpenGL/OpenGLContext.cpp
-        src/Snailgine/Graphic/OpenGL/OpenGLContext.hpp
         src/Snailgine/Graphic/Context.cpp
         src/Snailgine/Graphic/Context.hpp
         src/Snailgine/Graphic/Graphic.cpp
@@ -92,9 +89,23 @@ add_library(
         src/Snailgine/Layer/Layer.hpp
         src/Snailgine/Layer/LayerStack.cpp
         src/Snailgine/Layer/LayerStack.hpp
+        src/Snailgine/Math/Mat4.hpp
         src/Snailgine/Math/Vec2.hpp
+        src/Snailgine/Math/Vec3.hpp
         src/Snailgine/Math/Vec4.hpp
 )
+
+if (SN_GRAPHIC_BACKEND STREQUAL "OpenGL")
+    target_sources(
+            ${TARGET_NAME}
+            PRIVATE src/Snailgine/Graphic/OpenGL/OpenGL.cpp
+            PRIVATE src/Snailgine/Graphic/OpenGL/OpenGL.hpp
+            PRIVATE src/Snailgine/Graphic/OpenGL/OpenGLContext.cpp
+            PRIVATE src/Snailgine/Graphic/OpenGL/OpenGLContext.hpp
+            PRIVATE src/Snailgine/Graphic/OpenGL/OpenGLShader.cpp
+            PRIVATE src/Snailgine/Graphic/OpenGL/OpenGLShader.hpp
+    )
+endif ()
 
 if (WIN32)
     target_sources(

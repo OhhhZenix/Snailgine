@@ -1,6 +1,5 @@
 #include "Graphic.hpp"
 
-#include "Snailgine/Core/Log.hpp"
 #include "Snailgine/Graphic/OpenGL/OpenGL.hpp"
 
 namespace sn

@@ -10,9 +10,12 @@
 #include "Snailgine/Event/Mouse/MouseButtonReleasedEvent.hpp"
 #include "Snailgine/Event/Mouse/MouseScrolledEvent.hpp"
 #include "Snailgine/Event/Mouse/MouseMovedEvent.hpp"
+#include "Snailgine/Graphic/Renderer.hpp"
 
 namespace sn
 {
+	static uint8_t s_WindowCount = 0;
+
 	void ErrorCallback(int p_Code, const char* p_Description)
 	{
 		SN_LOG_ERROR("GLFW Error code={0} description={1}", p_Code, p_Description);
@@ -101,30 +104,29 @@ namespace sn
 
 	WindowsWindow::WindowsWindow(const WindowSettings& p_Settings)
 	{
-		m_Handle = nullptr;
-		m_Context = nullptr;
-		m_Settings = p_Settings;
-	}
-
-	WindowsWindow::~WindowsWindow()
-	{
-		delete m_Context;
-		glfwDestroyWindow(static_cast<GLFWwindow*>(m_Handle));
-		glfwTerminate();
-	}
-
-	void WindowsWindow::Init()
-	{
 		SN_PROFILE_FUNCTION();
 
+		SN_LOG_INFO("Creating a window with Title='{}' Width={} Height={}", p_Settings.Title, p_Settings
+			.Width, p_Settings.Height);
+
+		// Set the settings
+		m_Settings = p_Settings;
+
 		// Tries to initialize GLFW, but if fail it will exit the app
-		if (!glfwInit())
+		if (s_WindowCount == 0)
 		{
-			SN_LOG_ASSERT(false, "Could not initialize glfw!");
-			std::exit(EXIT_FAILURE);
+			int f_Success = glfwInit();
+			SN_LOG_ASSERT(f_Success, "Could not initialize glfw!");
+			glfwSetErrorCallback(ErrorCallback);
 		}
 
-		glfwSetErrorCallback(ErrorCallback);
+		// For debugging purposes for OpenGL
+#if defined(SN_BUILD_DEBUG)
+		if (Renderer::GetAPI() == GraphicAPI::OpenGL)
+		{
+			glfwWindowHint(GLFW_OPENGL_DEBUG_CONTEXT, GLFW_TRUE);
+		}
+#endif
 
 		// Tries to create a window
 		glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
@@ -139,13 +141,15 @@ namespace sn
 			std::exit(EXIT_FAILURE);
 		}
 
+		s_WindowCount++;
+
 		// Set user pointer
 		glfwSetWindowUserPointer(static_cast<GLFWwindow*>(m_Handle), &m_Settings);
 
 		// Makes a graphic context for the window
 		m_Context = Context::Create(m_Handle);
 		m_Context->Init();
-		// SetVsync(m_Settings.Vsync);
+		SetVSync(m_Settings.Vsync);
 
 		// Callbacks
 		glfwSetWindowCloseCallback(static_cast<GLFWwindow*>(m_Handle), WindowCloseCallback);
@@ -155,6 +159,15 @@ namespace sn
 		glfwSetMouseButtonCallback(static_cast<GLFWwindow*>(m_Handle), MouseButtonCallback);
 		glfwSetScrollCallback(static_cast<GLFWwindow*>(m_Handle), ScrollCallback);
 		glfwSetCursorPosCallback(static_cast<GLFWwindow*>(m_Handle), CursorPosCallback);
+	}
+
+	WindowsWindow::~WindowsWindow()
+	{
+		delete m_Context;
+		glfwDestroyWindow(static_cast<GLFWwindow*>(m_Handle));
+
+		if (s_WindowCount == 0)
+			glfwTerminate();
 	}
 
 	void WindowsWindow::ProcessUpdate()

@@ -45,7 +45,7 @@ namespace sn
 #define SN_LOG_WARN(...)       ::sn::Log::Instance().GetLogger()->warn(__VA_ARGS__)
 #define SN_LOG_ERROR(...)      ::sn::Log::Instance().GetLogger()->error(__VA_ARGS__)
 #define SN_LOG_CRITICAL(...)   ::sn::Log::Instance().GetLogger()->critical(__VA_ARGS__)
-#define SN_LOG_ASSERT(x, ...)  { if (!(x)) { SN_LOG_ERROR("assertion failed reason={0}", __VA_ARGS__); assert(false); } }
+#define SN_LOG_ASSERT(x, ...) { if (!(x)) { SN_LOG_ERROR("assertion failed reason={0}", __VA_ARGS__); assert(false); } }
 #else
 #define SN_LOG_TRACE(...)
 #define SN_LOG_DEBUG(...)

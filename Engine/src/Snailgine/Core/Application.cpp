@@ -37,13 +37,16 @@ namespace sn
 
 	void Application::Init()
 	{
-		m_Window->Init();
 		Renderer::Init();
 
 		EventBus::Instance().Subscribe(this, &Application::OnWindowCloseEvent);
 		EventBus::Instance().Subscribe(this, &Application::OnWindowResizeEvent);
 
 		PushOverlay(m_ImGuiLayer);
+
+		// Vertex Array
+		// Vertex Buffer
+		// Index Buffer
 	}
 
 	void Application::Run()
@@ -60,6 +63,7 @@ namespace sn
 				{
 					if (!m_LayerStack.GetLayers().empty())
 					{
+						m_ImGuiLayer->Begin();
 						for (Layer* f_Layer : m_LayerStack.GetLayers())
 						{
 							if (!f_Layer->IsEnabled())
@@ -67,10 +71,9 @@ namespace sn
 
 							f_Layer->ProcessUpdate(f_DeltaTime);
 
-							m_ImGuiLayer->Begin();
 							f_Layer->ProcessRender();
-							m_ImGuiLayer->End();
 						}
+						m_ImGuiLayer->End();
 					}
 				}
 
