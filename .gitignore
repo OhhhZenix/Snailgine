@@ -10,5 +10,8 @@ build/
 
 # CLion
 .idea/
-cmake-build-debug/
-cmake-build-release/
+cmake-build-*/
+
+# Visual Studio
+.vs/
+out/
