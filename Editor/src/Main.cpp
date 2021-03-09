@@ -3,23 +3,24 @@
 
 class ExampleLayer : public sn::Layer
 {
- public:
-	void ProcessRender() override {
-		ImGui::Begin("Test");
-		ImGui::Text("Hello World!");
-		ImGui::End();
-	}
+    public:
+        void ProcessRender() override
+        {
+            ImGui::Begin("Test");
+            ImGui::Text("Hello World!");
+            ImGui::End();
+        }
 };
 
 int main()
 {
-	// Snailgine Initialize
-	sn::Init();
+    // Snailgine Initialize
+    sn::Init();
 
-	// Some setups
+    // Some setups
 
-	sn::Application::Instance().PushLayer(new ExampleLayer());
+    // sn::Application::Instance().PushLayer(new ExampleLayer());
 
-	// Runs the app;
-	sn::Application::Instance().Run();
+    // Runs the app;
+    sn::Application::Instance().Run();
 }
