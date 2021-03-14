@@ -10,10 +10,9 @@ add_subdirectory(spdlog)
 set_target_properties(spdlog PROPERTIES FOLDER extern)
 
 # glad
-set(GLAD_INSTALL OFF CACHE BOOL "" FORCE)
 set(GLAD_PROFILE "core" CACHE STRING "" FORCE)
-set(GLAD_ALL_EXTENSIONS ON CACHE STRING "" FORCE)
-set(GLAD_API "gl=3.3" CACHE STRING "" FORCE)
+set(GLAD_API "gl=4.5" CACHE STRING "" FORCE)
+set(GLAD_INSTALL OFF CACHE BOOL "" FORCE)
 add_subdirectory(glad)
 set_target_properties(glad PROPERTIES FOLDER extern)
 set_target_properties(glad-generate-files PROPERTIES FOLDER extern)
