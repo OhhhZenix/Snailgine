@@ -1,26 +1,16 @@
-#include <imgui.h>
 #include <Snailgine.hpp>
 
-class ExampleLayer : public sn::Layer
-{
-    public:
-        void ProcessRender() override
-        {
-            ImGui::Begin("Test");
-            ImGui::Text("Hello World!");
-            ImGui::End();
-        }
+class App : public sn::Application {
+public:
+	App() {
+
+	}
+
+	~App() override {
+
+	}
 };
 
-int main()
-{
-    // Snailgine Initialize
-    sn::Init();
-
-    // Some setups
-
-    // sn::Application::Instance().PushLayer(new ExampleLayer());
-
-    // Runs the app;
-    sn::Application::Instance().Run();
+sn::Application* sn::create_application() {
+	return new App();
 }
