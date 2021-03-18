@@ -1,0 +1,12 @@
+[submodule "extern/bgfx.cmake"]
+	path = extern/bgfx.cmake
+	url = https://github.com/widberg/bgfx.cmake.git
+[submodule "extern/SDL"]
+	path = extern/SDL
+	url = https://github.com/libsdl-org/SDL.git
+[submodule "extern/spdlog"]
+	path = extern/spdlog
+	url = https://github.com/gabime/spdlog.git
+[submodule "extern/glfw"]
+	path = extern/glfw
+	url = https://github.com/glfw/glfw.git
