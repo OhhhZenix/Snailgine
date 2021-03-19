@@ -8,6 +8,15 @@ set(SN_ENABLE_PROFILE ON CACHE BOOL "Enable or disable the profiling" FORCE)
 ### Target ###
 set(TARGET_NAME Snailgine)
 file(GLOB_RECURSE SRCS "src/*.cpp" "include/*.hpp")
+
+message(${SRCS})
+
+if (NOT WIN32)
+    list(REMOVE_ITEM SRCS "${CMAKE_CURRENT_SOURCE_DIR}/include/Snailgine/Platform/WindowsWindow.hpp")
+endif ()
+
+message(${SRCS})
+
 add_library(${TARGET_NAME} ${SRCS})
 
 ### Target Include Directories ###
@@ -17,8 +26,8 @@ target_include_directories(${TARGET_NAME} PUBLIC "include")
 target_precompile_headers(${TARGET_NAME} PRIVATE "include/Snailgine/PCH.hpp")
 
 ### Linking Library ###
-get_filename_component(PARENT_DIR "${CMAKE_CURRENT_SOURCE_DIR}/.." ABSOLUTE)
-set(EXTERN_PATH "${PARENT_DIR}/extern")
+# imgui
+target_link_libraries(${TARGET_NAME} PUBLIC "imgui")
 
 # spdlog
 target_link_libraries(${TARGET_NAME} PUBLIC "spdlog")
