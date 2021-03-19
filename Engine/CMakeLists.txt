@@ -9,8 +9,8 @@ set(SN_ENABLE_PROFILE ON CACHE BOOL "Enable or disable the profiling" FORCE)
 set(TARGET_NAME Snailgine)
 add_library(
 	${TARGET_NAME}
-	src/Core/Application.cpp
-)
+	"src/Core/Application.cpp"
+ "include/Snailgine/Base.hpp" "include/Snailgine/Core/Log.hpp" "include/Snailgine/Core/Memory.hpp" "src/Core/Log.cpp")
 
 ### Target Include Directories ###
 target_include_directories(${TARGET_NAME} PUBLIC "include")
@@ -19,21 +19,15 @@ target_include_directories(${TARGET_NAME} PUBLIC "include")
 target_precompile_headers(${TARGET_NAME} PRIVATE "include/Snailgine/PCH.hpp")
 
 ### Linking Library ###
-# imgui
-target_link_libraries(${TARGET_NAME} PUBLIC "imgui")
-
 # spdlog
+add_subdirectory("extern/spdlog")
 target_link_libraries(${TARGET_NAME} PUBLIC "spdlog")
 
 # bgfx
+add_subdirectory("extern/bgfx.cmake")
 target_link_libraries(${TARGET_NAME} PRIVATE "bgfx")
 
-# glfw
-target_link_libraries(${TARGET_NAME} PRIVATE "glfw")
-
 ### Definitions ###
-target_compile_definitions(${TARGET_NAME} PRIVATE "GLFW_INCLUDE_NONE")
-
 if (CMAKE_BUILD_TYPE STREQUAL "Debug")
     target_compile_definitions(${TARGET_NAME} PUBLIC "SN_BUILD_DEBUG=1")
 else ()
@@ -56,13 +50,4 @@ if (SN_ENABLE_PROFILE EQUAL ON)
     target_compile_definitions(${TARGET_NAME} PUBLIC "SN_PROFILE=1")
 else ()
     target_compile_definitions(${TARGET_NAME} PUBLIC "SN_PROFILE=0")
-endif ()
-
-# glfw
-if (WIN32)
-    target_compile_definitions(${TARGET_NAME} PRIVATE "GLFW_EXPOSE_NATIVE_WIN32")
-elseif(APPLE)
-    target_compile_definitions(${TARGET_NAME} PRIVATE "GLFW_EXPOSE_NATIVE_COCOA")
-elseif(UNIX AND NOT APPLE)
-    target_compile_definitions(${TARGET_NAME} PRIVATE "GLFW_EXPOSE_NATIVE_X11")
 endif ()
