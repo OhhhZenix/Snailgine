@@ -10,7 +10,8 @@ set(TARGET_NAME Snailgine)
 add_library(
 	${TARGET_NAME}
 	"src/Core/Application.cpp"
- "include/Snailgine/Base.hpp" "include/Snailgine/Core/Log.hpp" "include/Snailgine/Core/Memory.hpp" "src/Core/Log.cpp")
+    "src/Core/Log.cpp"
+)
 
 ### Target Include Directories ###
 target_include_directories(${TARGET_NAME} PUBLIC "include")

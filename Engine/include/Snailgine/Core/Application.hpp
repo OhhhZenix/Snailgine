@@ -4,18 +4,19 @@
 
 namespace sn {
 
-class Application {
+class Application
+{
 public:
-	Application();
+  Application();
 
-	virtual ~Application();
+  virtual ~Application();
 
-	static RefCountPtr<Application*>& instance();
+  static RefCountPtr<Application *> &instance();
 
-	void run();
+  void run();
 };
 
 // To be defined by client
-extern sn::Application* createApplication();
+extern sn::Application *createApplication();
 
-} // namespace sn
+}// namespace sn

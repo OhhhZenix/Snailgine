@@ -9,9 +9,9 @@ namespace sn::Log {
 
 void init();
 
-RefCountPtr<spdlog::logger>& getLogger();
+RefCountPtr<spdlog::logger> &getLogger();
 
-} // namespace sn::Log
+}// namespace sn::Log
 
 // Logging only works in debug builds
 #if defined(SN_BUILD_DEBUG)
@@ -21,13 +21,13 @@ RefCountPtr<spdlog::logger>& getLogger();
 #define SN_LOG_WARN(...) ::sn::Log::getLogger()->warn(__VA_ARGS__);
 #define SN_LOG_ERROR(...) ::sn::Log::getLogger()->error(__VA_ARGS__);
 #define SN_LOG_CRITICAL(...) ::sn::Log::getLogger()->critical(__VA_ARGS__);
-#define SN_LOG_ASSERT(x, ...)                                         \
-	{                                                                 \
-		if (!(x)) {                                                   \
-			SN_LOG_ERROR("assertion failed reason={0}", __VA_ARGS__); \
-			assert(false);                                            \
-		}                                                             \
-	}
+#define SN_LOG_ASSERT(x, ...)                                   \
+  {                                                             \
+    if (!(x)) {                                                 \
+      SN_LOG_ERROR("assertion failed reason={0}", __VA_ARGS__); \
+      assert(false);                                            \
+    }                                                           \
+  }
 #else
 #define SN_LOG_TRACE(...)
 #define SN_LOG_DEBUG(...)
